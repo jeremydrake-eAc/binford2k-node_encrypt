@@ -6,7 +6,9 @@ Puppet::Type.type(:node_encrypted_file).provide(:ruby) do
   end
 
   def create
-    File.write(resource[:path], resource[:content].decrypted_value)
+    File.open(resource[:path], "w", 0600) {|f|
+      f.write(resource[:content].decrypted_value)
+    }
   end
 
   def destroy
@@ -18,6 +20,8 @@ Puppet::Type.type(:node_encrypted_file).provide(:ruby) do
   end
 
   def content=(value)
-    File.write(resource[:path], resource[:content].decrypted_value)
+    File.open(resource[:path], "w", 0600) {|f|
+      f.write(resource[:content].decrypted_value)
+    }
   end
 end
