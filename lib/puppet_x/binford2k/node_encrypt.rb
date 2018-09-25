@@ -13,7 +13,7 @@ module Puppet_X
         raise ArgumentError, 'Need a node name to encrypt for' unless destination.class == String
 
         # encrypt with the CA cert on the CA, and the host cert on compile masters
-        if Facter.value(:fqdn) == Puppet.settings[:ca_server]
+        if true or Facter.value(:fqdn) == Puppet.settings[:ca_server]
           certpath = Puppet.settings[:cacert]
           keypath  = Puppet.settings[:cakey]
           destpath = "#{Puppet.settings[:signeddir]}/#{destination}.pem"
